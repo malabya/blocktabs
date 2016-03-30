@@ -82,7 +82,7 @@ class BlockContentTab extends ConfigurableTabBase {
     $block = \Drupal::entityManager()->loadEntityByUuid('block_content', $block_uuid);
 	
     $block_render_array = \Drupal::entityManager()->getViewBuilder($block->getEntityTypeId())->view($block, 'default');
-    $tab_content = drupal_render($block_render_array);
+    $tab_content = \Drupal::service('renderer')->render($block_render_array);
 	}
     return $tab_content;
   }
