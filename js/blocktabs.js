@@ -14,7 +14,7 @@
    * @type {Drupal~behavior}
    *
    * @prop {Drupal~behaviorAttach} attach
-   *   
+   *
    */
   Drupal.behaviors.blocktabs = {
     attach: function (context, settings) {
