@@ -10,7 +10,6 @@
   /**
    * Add jquery ui tabs effect.
    *
-   *
    * @type {Drupal~behavior}
    *
    * @prop {Drupal~behaviorAttach} attach
@@ -25,6 +24,5 @@
       });
     }
   };
-
 
 }(jQuery, Drupal));
