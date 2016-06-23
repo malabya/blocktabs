@@ -4,3 +4,4 @@ blocktabs:
     js/blocktabs.js: {}
   dependencies:
     - core/jquery.ui.tabs
+    - core/drupal
