@@ -58,19 +58,36 @@ class ViewsTab extends ConfigurableTabBase {
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state, $view_name = NULL) {
+	$view_options = Views::getViewsAsOptions(TRUE, 'all', NULL, FALSE, TRUE);
     $form['view_name'] = array(
-      '#type' => 'textfield',
+      '#type' => 'select',
       '#title' => t('view name'),
+	  '#options' => $view_options,
       '#default_value' => $this->configuration['view_name'],
       '#field_suffix' => ' ' ,
+      '#ajax' => [
+	    'callback' => array($this, 'updateDisplay'),
+        'wrapper' => 'edit-view-display-wrapper',
+      ], 
       '#required' => TRUE,
     );
+
+	$display_options = [];
+    if ($this->configuration['view_name']) {
+      $view = Views::getView($this->configuration['view_name']);
+      foreach ($view->storage->get('display') as $name => $display) {
+        $display_options[$name] = $display['display_title'];
+      }	
+	}
     $form['view_display'] = array(
-      '#type' => 'textfield',
+      '#type' => 'select',
       '#title' => t('Display'),
       '#default_value' => $this->configuration['view_display'],
-      '#field_suffix' => ' ' ,
+      '#prefix' => '<div id="edit-view-display-wrapper">',
+      '#suffix' => '</div>',
+	  '#options' => $display_options,
+      '#validated' => TRUE,	 
       '#required' => TRUE,
     );	
     $form['view_arg'] = array(
@@ -81,6 +98,22 @@ class ViewsTab extends ConfigurableTabBase {
 
     );		
     return $form;
+  }
+  public function updateDisplay($form, FormStateInterface $form_state) {
+
+    $form['data']['view_display']['#default_value'] = '';
+	$data =$form_state->getValue('data');
+	$view_name = isset($data['view_name']) ? $data['view_name'] : '';
+
+	$display_options = [];
+    if ($view_name) {
+      $view = Views::getView($view_name);
+      foreach ($view->storage->get('display') as $name => $display) {
+        $display_options[$name] = $display['display_title'];
+      }	
+	}	
+    $form['data']['view_display']['#options'] = $display_options;
+    return $form['data']['view_display'];
   }
 
   /**
