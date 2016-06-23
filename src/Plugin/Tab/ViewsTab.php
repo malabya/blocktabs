@@ -10,6 +10,7 @@ namespace Drupal\blocktabs\Plugin\Tab;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\blocktabs\ConfigurableTabBase;
 use Drupal\blocktabs\BlocktabsInterface;
+use Drupal\views\Views;
 
 /**
  * views tab.
