@@ -127,6 +127,11 @@ class BlocktabsBlock extends BlockBase implements ContainerFactoryPluginInterfac
 	}
 	*/
 	$blocktabs_entity = $this->getEntity();
+	$build['block'] = array(
+	  '#theme' => 'blocktabs',
+	  '#blocktabs' => $blocktabs_entity,
+	);
+	/*
 	$tabs = $blocktabs_entity->getTabs();
     $tabs_id = 'blocktabs-' . $blocktabs_entity->id();
 	$titles = '';
@@ -141,13 +146,16 @@ class BlocktabsBlock extends BlockBase implements ContainerFactoryPluginInterfac
 	//$content .= '<div>';
 	foreach ($tabs as $tab) {
 	  $tab_id = $tabs_id . '-' . $tab->getWeight();
-	  $content .= '<div id="'. $tab_id .'">' . $tab->getContent() .'</div>';
+	  $tab_content_array = $tab->getContent();
+	  $tab_content =  \Drupal::service('renderer')->renderPlain($tab_content_array);
+	  $content .= '<div id="'. $tab_id .'">' . $tab_content .'</div>';
 	}
 	//$content .= '</div>';	
 	//drupal_set_message(var_export($btabs));
     $build['block'] = array(
 	    '#markup' => '<div id="' . $tabs_id . '" class="blocktabs">' . $titles . $content . '</div>',
 	);
+	*/
     $build['block']['#attached']['library'][] = 'blocktabs/blocktabs';
     return $build;
   }
