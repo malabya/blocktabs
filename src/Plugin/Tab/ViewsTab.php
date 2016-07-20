@@ -137,7 +137,7 @@ class ViewsTab extends ConfigurableTabBase {
     $view_display = $this->configuration['view_display'];
     $view_arg = !empty($this->configuration['view_arg']) ? $this->configuration['view_arg'] : NULL;
     $tab_view = views_embed_view($view_name, $view_display, $view_arg);	
-	$tab_content =  \Drupal::service('renderer')->render($tab_view);
-    return $tab_content;
+	//$tab_content =  \Drupal::service('renderer')->render($tab_view);
+    return $tab_view;
   }
 }

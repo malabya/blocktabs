@@ -97,8 +97,8 @@ class BlockTab extends ConfigurableTabBase {
     // Some blocks might implement access check.
 
     $render = $plugin_block->build();
-	$tab_content = \Drupal::service('renderer')->render($render);
+	//$tab_content = \Drupal::service('renderer')->render($render);
 	
-    return $tab_content;
+    return $render;
   }
 }

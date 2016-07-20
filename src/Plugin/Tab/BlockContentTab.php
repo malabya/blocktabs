@@ -86,6 +86,7 @@ class BlockContentTab extends ConfigurableTabBase {
   
   public function getContent() {
     $tab_content = '';
+	$block_render_array = null;
     $block_uuid = $this->configuration['block_uuid'];
 	if(!empty($block_uuid)){
     $block = \Drupal::entityManager()->loadEntityByUuid('block_content', $block_uuid);
@@ -93,6 +94,6 @@ class BlockContentTab extends ConfigurableTabBase {
     $block_render_array = \Drupal::entityManager()->getViewBuilder($block->getEntityTypeId())->view($block, 'default');
     $tab_content = \Drupal::service('renderer')->render($block_render_array);
 	}
-    return $tab_content;
+    return $block_render_array;
   }
 }
