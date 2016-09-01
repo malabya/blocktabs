@@ -36,11 +36,15 @@ class ViewsTab extends ConfigurableTabBase {
    * {@inheritdoc}
    */
   public function getSummary() {
+    $markup = t('view name:') . $this->configuration['view_name'] . '; ';
+	$markup .= t('display:') . $this->configuration['view_display'] . '; ';
+    if(!empty($this->configuration['view_arg'])){
+	  $markup .= t('argument:') . $this->configuration['view_arg'];
+    }
     $summary = array(
-      '#theme' => 'tab_summary',
-      '#data' => $this->configuration,
-    );
-    $summary += parent::getSummary();
+      '#markup' => '(' . $markup . ')',
+    ); 
+    //$summary = parent::getSummary();
 
     return $summary;
   }

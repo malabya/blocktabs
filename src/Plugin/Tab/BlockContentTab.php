@@ -35,12 +35,11 @@ class BlockContentTab extends ConfigurableTabBase {
    * {@inheritdoc}
    */
   public function getSummary() {
+  
     $summary = array(
-      '#theme' => 'tab_summary',
-      '#data' => $this->configuration,
+      '#markup' => '(' . t('block uuid:') . $this->configuration['block_uuid'] . ')',
     );
-    $summary += parent::getSummary();
-
+    //$summary = parent::getSummary();
     return $summary;
   }
 

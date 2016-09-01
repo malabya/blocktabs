@@ -35,11 +35,11 @@ class BlockTab extends ConfigurableTabBase {
    * {@inheritdoc}
    */
   public function getSummary() {
+  
     $summary = array(
-      '#theme' => 'tab_summary',
-      '#data' => $this->configuration,
-    );
-    $summary += parent::getSummary();
+      '#markup' => '(' . t('Block plugin id:') . $this->configuration['block_id'] . ')',
+    ); 
+    //$summary = parent::getSummary();
 
     return $summary;
   }
