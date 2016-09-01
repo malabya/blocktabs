@@ -156,7 +156,7 @@ class BlocktabsBlock extends BlockBase implements ContainerFactoryPluginInterfac
 	    '#markup' => '<div id="' . $tabs_id . '" class="blocktabs">' . $titles . $content . '</div>',
 	);
 	*/
-    $build['block']['#attached']['library'][] = 'blocktabs/blocktabs';
+    //$build['block']['#attached']['library'][] = 'blocktabs/blocktabs';
     return $build;
   }
   
