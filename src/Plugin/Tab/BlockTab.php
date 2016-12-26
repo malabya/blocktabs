@@ -7,9 +7,13 @@
 
 namespace Drupal\blocktabs\Plugin\Tab;
 
+use Drupal\Core\Block\BlockManagerInterface;
+use Drupal\Core\Block\BlockPluginInterface;
+use Psr\Log\LoggerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\blocktabs\ConfigurableTabBase;
 use Drupal\blocktabs\BlocktabsInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * block tab.
@@ -21,13 +25,45 @@ use Drupal\blocktabs\BlocktabsInterface;
  * )
  */
 class BlockTab extends ConfigurableTabBase {
+  /**
+   * @var \Drupal\Core\Block\BlockManagerInterface
+   */
+  protected $blockManager;
+
+  /**
+   * @var \Drupal\Core\Block\BlockPluginInterface
+   */
+  protected $blockPlugin;
+
+  /**in
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('logger.factory')->get('blocktabs'),
+      $container->get('plugin.manager.block')
+    );
+  }
 
   /**
    * {@inheritdoc}
    */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, LoggerInterface $logger, BlockManagerInterface $block_manager) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $logger);
+
+    $config = [];
+    $this->blockManager = $block_manager;
+    $this->blockPlugin = $this->blockManager->createInstance($this->configuration['block_id'], $config);
+  }
+
+  /**
+   * {@inheritdoc}data']
+   */
    
   public function addTab(BlocktabsInterface $blocktabs) {
-
     return TRUE;
   }
 
@@ -57,20 +93,21 @@ class BlockTab extends ConfigurableTabBase {
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
-    /*
-	$sql = "SELECT bd.info, b.uuid FROM {block_content_field_data} bd LEFT JOIN {block_content} b ON bd.id = b.id";
-    $result = db_query($sql);
-    $block_uuid_options = array(
-      '' => t('- Select -'),
-    );
-    foreach ($result as $block_content) {
-      $block_uuid_options[$block_content->uuid] = $block_content->info;
-    } 
-*/	
+    $definitions = $this->blockManager->getGroupedDefinitions();
+
+    $options = array();
+    foreach ($definitions as $group => $blocks) {
+      $options[$group] = array();
+
+      foreach ($blocks as $id => $block) {
+        $options[$group][$id] = $block['admin_label'];
+      }
+    }
+
     $form['block_id'] = array(
-      '#type' => 'textfield',
+      '#type' => 'select',
       '#title' => t('Block id'),
-      //'#options' => $block_uuid_options,
+      '#options' => $options,
       '#default_value' => $this->configuration['block_id'],
       '#required' => TRUE,
     );
@@ -87,18 +124,28 @@ class BlockTab extends ConfigurableTabBase {
   }
   
   public function getContent() {
-    $tab_content = '';
-    $block_id = $this->configuration['block_id'];
-
-    $block_manager = \Drupal::service('plugin.manager.block');
-    // You can hard code configuration or you load from settings.
-    $config = [];
-    $plugin_block = $block_manager->createInstance($block_id, $config);
-    // Some blocks might implement access check.
-
-    $render = $plugin_block->build();
-	//$tab_content = \Drupal::service('renderer')->render($render);
-	
-    return $render;
+    return $this->blockPlugin->build();
   }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheContexts() {
+    return $this->blockPlugin->getCacheContexts();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheTags() {
+    return $this->blockPlugin->getCacheTags();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheMaxAge() {
+    return $this->blockPlugin->getCacheMaxAge();
+  }
+
 }

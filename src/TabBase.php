@@ -8,7 +8,7 @@
 namespace Drupal\blocktabs;
 
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\Core\Plugin\PluginBase;
+use Drupal\Core\Plugin\ContextAwarePluginBase;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @see \Drupal\blocktabs\TabManager
  * @see plugin_api
  */
-abstract class TabBase extends PluginBase implements TabInterface, ContainerFactoryPluginInterface {
+abstract class TabBase extends ContextAwarePluginBase implements TabInterface, ContainerFactoryPluginInterface {
 
   /**
    * The tab ID.

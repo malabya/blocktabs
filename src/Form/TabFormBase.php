@@ -11,7 +11,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormState;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\blocktabs\ConfigurableTabInterface;
-use Drupal\blocktabs\BlockTabsInterface;
+use Drupal\blocktabs\BlocktabsInterface;
 use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -23,7 +23,7 @@ abstract class TabFormBase extends FormBase {
   /**
    * The blockTabs.
    *
-   * @var \Drupal\blocktabs\BlockTabsInterface
+   * @var \Drupal\blocktabs\BlocktabsInterface
    */
   protected $blocktabs;
 
@@ -44,7 +44,7 @@ abstract class TabFormBase extends FormBase {
   /**
    * {@inheritdoc}
    *
-   * @param \Drupal\blocktabs\BlockTabsInterface $blocktabs
+   * @param \Drupal\blocktabs\BlocktabsInterface $blocktabs
    *   The block tabs.
    * @param string $tab
    *   The tab ID.
@@ -54,7 +54,7 @@ abstract class TabFormBase extends FormBase {
    *
    * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
    */
-  public function buildForm(array $form, FormStateInterface $form_state, BlockTabsInterface $blocktabs = NULL, $tab = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, BlocktabsInterface $blocktabs = NULL, $tab = NULL) {
     $this->blocktabs = $blocktabs;
     try {
       $this->tab = $this->prepareTab($tab);

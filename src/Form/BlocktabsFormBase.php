@@ -20,7 +20,7 @@ abstract class BlocktabsFormBase extends EntityForm {
   /**
    * The entity being used by this form.
    *
-   * @var \Drupal\blocktabs\BlockTabsInterface
+   * @var \Drupal\blocktabs\BlocktabsInterface
    */
   protected $entity;
 

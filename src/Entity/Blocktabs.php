@@ -7,6 +7,7 @@
 
 namespace Drupal\blocktabs\Entity;
 
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Config\Entity\ConfigEntityBase;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityWithPluginCollectionInterface;
@@ -181,6 +182,37 @@ class Blocktabs extends ConfigEntityBase implements BlocktabsInterface, EntityWi
     return \Drupal::service('plugin.manager.blocktabs.tab');
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheContexts() {
+    $contexts = parent::getCacheContexts();
+    foreach ($this->getTabs() as $tab) {
+      $contexts = Cache::mergeContexts($tab->getCacheContexts());
+    }
+    return $contexts;
+  }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheTags() {
+    $tags = parent::getCacheTags();
+    foreach ($this->getTabs() as $tab) {
+      $tags = Cache::mergeTags($tab->getCacheTags());
+    }
+    return $tags;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheMaxAge() {
+    $max_age = parent::getCacheMaxAge();
+    foreach ($this->getTabs() as $tab) {
+      $max_age = Cache::mergeMaxAges($max_age, $tab->getCacheMaxAge());
+    }
+    return $max_age;
+  }
 
 }

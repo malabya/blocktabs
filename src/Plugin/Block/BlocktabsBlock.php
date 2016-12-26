@@ -174,6 +174,27 @@ class BlocktabsBlock extends BlockBase implements ContainerFactoryPluginInterfac
 	  //drupal_set_message('123456abc:' . $id);
     }
     return $this->blocktabs;
-  }  
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheContexts() {
+    return $this->getEntity()->getCacheContexts();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheTags() {
+    return $this->getEntity()->getCacheTags();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheMaxAge() {
+    return $this->getEntity()->getCacheMaxAge();
+  }
 
 }

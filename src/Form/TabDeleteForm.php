@@ -9,7 +9,7 @@ namespace Drupal\blocktabs\Form;
 
 use Drupal\Core\Form\ConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\blocktabs\BlockTabsInterface;
+use Drupal\blocktabs\BlocktabsInterface;
 
 /**
  * Form for deleting a tab.
@@ -19,7 +19,7 @@ class TabDeleteForm extends ConfirmFormBase {
   /**
    * The blocktabs containing the tab to be deleted.
    *
-   * @var \Drupal\blocktabs\BlockTabsInterface
+   * @var \Drupal\blocktabs\BlocktabsInterface
    */
   protected $blockTabs;
 
@@ -61,7 +61,7 @@ class TabDeleteForm extends ConfirmFormBase {
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state, BlockTabsInterface $blocktabs = NULL, $tab = NULL) {
+  public function buildForm(array $form, FormStateInterface $form_state, BlocktabsInterface $blocktabs = NULL, $tab = NULL) {
     $this->blockTabs = $blocktabs;
     $this->tab = $this->blockTabs->getTab($tab);
 
