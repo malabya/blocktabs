@@ -1,5 +1,5 @@
 entity.blocktabs.collection:
-  title: 'block tabs'
+  title: 'Block tabs'
   description: 'Manage block tabs.'
   parent: system.admin_structure
   route_name: entity.blocktabs.collection
