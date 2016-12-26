@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blocktabs\Form\TabFormBase.
- */
-
 namespace Drupal\blocktabs\Form;
 
 use Drupal\Core\Form\FormBase;

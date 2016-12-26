@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blocktabs\Plugin\Tab\ViewsTab.
- */
-
 namespace Drupal\blocktabs\Plugin\Tab;
 
 use Drupal\Core\Form\FormStateInterface;

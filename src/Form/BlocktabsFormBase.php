@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blocktabs\Form\BlocktabsFormBase.
- */
-
 namespace Drupal\blocktabs\Form;
 
 use Drupal\Core\Entity\EntityForm;

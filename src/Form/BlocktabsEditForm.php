@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blocktabs\Form\BlocktabsEditForm.
- */
-
 namespace Drupal\blocktabs\Form;
 
 use Drupal\Core\Entity\EntityStorageInterface;

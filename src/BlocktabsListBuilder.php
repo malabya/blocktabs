@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blocktabs\BlocktabsListBuilder.
- */
-
 namespace Drupal\blocktabs;
 
 use Drupal\Core\Config\Entity\ConfigEntityListBuilder;

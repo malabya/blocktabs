@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blocktabs\Entity\Blocktabs.
- */
-
 namespace Drupal\blocktabs\Entity;
 
 use Drupal\Core\Cache\Cache;

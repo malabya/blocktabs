@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blocktabs\BlocktabsInterface.
- */
-
 namespace Drupal\blocktabs;
 
 use Drupal\Core\Config\Entity\ConfigEntityInterface;

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blocktabs\Plugin\Derivative\BlocktabsBlock.
- */
-
 namespace Drupal\blocktabs\Plugin\Derivative;
 
 use Drupal\Component\Plugin\Derivative\DeriverBase;

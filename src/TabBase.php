@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blocktabs\TabBase.
- */
-
 namespace Drupal\blocktabs;
 
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blocktabs\ConfigurableTabBase.
- */
-
 namespace Drupal\blocktabs;
 
 use Drupal\Core\Form\FormStateInterface;

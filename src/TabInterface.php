@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blocktabs\TabInterface.
- */
-
 namespace Drupal\blocktabs;
 
 use Drupal\Component\Plugin\ConfigurablePluginInterface;

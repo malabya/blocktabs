@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blocktabs\Plugin\Block\BlocktabsBlock.
- */
-
 namespace Drupal\blocktabs\Plugin\Block;
 
 use Drupal\Core\Access\AccessResult;

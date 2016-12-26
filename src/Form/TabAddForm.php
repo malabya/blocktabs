@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\blocktabs\Form\TabAddForm.
- */
-
 namespace Drupal\blocktabs\Form;
 
 use Drupal\Core\Form\FormStateInterface;
