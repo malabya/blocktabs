@@ -28,6 +28,11 @@
             event: "mouseover"
           });
         }
+        if($(this).hasClass( "vertical" )){
+           $(this).addClass( "ui-tabs-vertical ui-helper-clearfix" );
+           $(this).find('li').removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );			
+        }
+		
       });
     }
   };

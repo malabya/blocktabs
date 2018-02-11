@@ -80,7 +80,19 @@ abstract class BlocktabsFormBase extends EntityForm {
       ],
     ];
 	
-
+    $default_style = $this->entity->getStyle();
+    if(empty($default_style)){
+       $default_style = 'default';
+	}	
+    $form['style'] = [
+      '#type' => 'radios',
+      '#title' => $this->t('Style'),
+      '#default_value' => $default_style,
+      '#options' => [
+        'default' => $this->t('Default tabs'),
+		'vertical' => $this->t('Vertical tabs')
+      ],	  
+    ];
     return parent::form($form, $form_state);
   }
 

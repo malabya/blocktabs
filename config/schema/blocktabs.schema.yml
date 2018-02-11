@@ -10,6 +10,9 @@ blocktabs.blocktabs.*:
     event:
       type: string
       label: 'Event'
+    style:
+      type: string
+      label: 'Tabs Style'      
     tabs:
       type: sequence
       sequence:

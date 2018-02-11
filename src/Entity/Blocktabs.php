@@ -39,7 +39,8 @@ use Drupal\blocktabs\TabPluginCollection;
  *     "name",
  *     "label",
  *     "tabs",
- *     "event" 
+ *     "event",
+ *     "style"
  *   }
  * )
  */
@@ -65,6 +66,13 @@ class Blocktabs extends ConfigEntityBase implements BlocktabsInterface, EntityWi
    *
    */
   protected $event;  
+  
+  /**
+   * The blocktabs style, default, vertical
+   *
+   * @var string   
+   */
+  protected $style;  
 
   /**
    * The array of tabs for this blocktabs.
@@ -222,6 +230,12 @@ class Blocktabs extends ConfigEntityBase implements BlocktabsInterface, EntityWi
    */
   public function getEvent(){
     return $this->get('event');
-  }  
-
+  } 
+  
+  /**
+   * {@inheritdoc}
+   */
+  public function getStyle(){
+    return $this->get('style');
+  }
 }
