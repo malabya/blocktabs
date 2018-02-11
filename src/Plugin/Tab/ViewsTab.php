@@ -80,7 +80,7 @@ class ViewsTab extends ConfigurableTabBase {
     if ($this->configuration['view_name']) {
       $view = Views::getView($this->configuration['view_name']);
       foreach ($view->storage->get('display') as $name => $display) {
-        $display_options[$name] = $display['display_title'];
+        $display_options[$name] = $display['display_title'] . ' (' . $display['id'] . ')';
       }	
 	}
 	
@@ -123,7 +123,7 @@ class ViewsTab extends ConfigurableTabBase {
     if ($view_name) {
       $view = Views::getView($view_name);
       foreach ($view->storage->get('display') as $name => $display) {
-        $display_options[$name] = $display['display_title'];
+        $display_options[$name] = $display['display_title'] . ' (' . $display['id'] . ')';
       }	
 	}	
     $form['data']['view_display']['#options'] = $display_options;
