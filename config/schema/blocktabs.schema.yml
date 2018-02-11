@@ -1,4 +1,4 @@
-blocktabs.instance.*:
+blocktabs.blocktabs.*:
   type: config_entity
   label: 'blocktabs instance'
   mapping:
@@ -7,7 +7,7 @@ blocktabs.instance.*:
     label:
       type: string
       label: 'Label'
-    tab:
+    tabs:
       type: sequence
       sequence:
         type: mapping
@@ -15,7 +15,7 @@ blocktabs.instance.*:
           id:
             type: string
           title:
-            type: string
+            type: text
             label: 'Tab title'
           data:
             type: blocktabs.tab.[%parent.id]
