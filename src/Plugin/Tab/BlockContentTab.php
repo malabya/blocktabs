@@ -32,7 +32,7 @@ class BlockContentTab extends ConfigurableTabBase {
   public function getSummary() {
   
     $summary = array(
-      '#markup' => '(' . t('block uuid:') . $this->configuration['block_uuid'] . ')',
+      '#markup' => '(' . $this->t('block uuid:') . $this->configuration['block_uuid'] . ')',
     );
     //$summary = parent::getSummary();
     return $summary;
@@ -54,14 +54,14 @@ class BlockContentTab extends ConfigurableTabBase {
     $sql = "SELECT bd.info, b.uuid FROM {block_content_field_data} bd LEFT JOIN {block_content} b ON bd.id = b.id";
     $result = db_query($sql);
     $block_uuid_options = array(
-      '' => t('- Select -'),
+      '' => $this->t('- Select -'),
     );
     foreach ($result as $block_content) {
       $block_uuid_options[$block_content->uuid] = $block_content->info;
     }  
     $form['block_uuid'] = array(
       '#type' => 'select',
-      '#title' => t('Block uuid'),
+      '#title' => $this->t('Block uuid'),
       '#options' => $block_uuid_options,
       '#default_value' => $this->configuration['block_uuid'],
       '#required' => TRUE,

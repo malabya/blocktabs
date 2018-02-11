@@ -75,7 +75,7 @@ abstract class TabFormBase extends FormBase {
 	
     $form['title'] = array(
       '#type' => 'textfield',
-      '#title' => t('Tab title'),
+      '#title' => $this->t('Tab title'),
       '#default_value' => $this->tab->getTitle(),
       '#required' => TRUE,
     );	

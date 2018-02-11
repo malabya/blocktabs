@@ -68,7 +68,7 @@ class BlockTab extends ConfigurableTabBase {
   public function getSummary() {
   
     $summary = array(
-      '#markup' => '(' . t('Block plugin id:') . $this->configuration['block_id'] . ')',
+      '#markup' => '(' . $this->t('Block plugin id:') . $this->configuration['block_id'] . ')',
     ); 
     //$summary = parent::getSummary();
 
@@ -101,7 +101,7 @@ class BlockTab extends ConfigurableTabBase {
 
     $form['block_id'] = array(
       '#type' => 'select',
-      '#title' => t('Block id'),
+      '#title' => $this->t('Block id'),
       '#options' => $options,
       '#default_value' => $this->configuration['block_id'],
       '#required' => TRUE,

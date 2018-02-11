@@ -33,10 +33,10 @@ class ViewsTab extends ConfigurableTabBase {
    * {@inheritdoc}
    */
   public function getSummary() {
-    $markup = t('view name:') . $this->configuration['view_name'] . '; ';
-	$markup .= t('display:') . $this->configuration['view_display'] . '; ';
+    $markup = $this->t('view name:') . $this->configuration['view_name'] . '; ';
+	$markup .= $this->t('display:') . $this->configuration['view_display'] . '; ';
     if(!empty($this->configuration['view_arg'])){
-	  $markup .= t('argument:') . $this->configuration['view_arg'];
+	  $markup .= $this->t('argument:') . $this->configuration['view_arg'];
     }
     $summary = array(
       '#markup' => '(' . $markup . ')',
@@ -64,7 +64,7 @@ class ViewsTab extends ConfigurableTabBase {
 	$view_options = Views::getViewsAsOptions(TRUE, 'all', NULL, FALSE, TRUE);
     $form['view_name'] = array(
       '#type' => 'select',
-      '#title' => t('view name'),
+      '#title' => $this->t('view name'),
 	  '#options' => $view_options,
       '#default_value' => $this->configuration['view_name'],
       '#field_suffix' => ' ' ,
@@ -88,7 +88,7 @@ class ViewsTab extends ConfigurableTabBase {
 	
     $form['view_display'] = array(
       '#type' => 'select',
-      '#title' => t('Display'),
+      '#title' => $this->t('Display'),
       '#default_value' => $this->configuration['view_display'],
       '#prefix' => '<div id="edit-view-display-wrapper">',
       '#suffix' => '</div>',
@@ -106,7 +106,7 @@ class ViewsTab extends ConfigurableTabBase {
 */	
     $form['view_arg'] = array(
       '#type' => 'textfield',
-      '#title' => t('Argument'),
+      '#title' => $this->t('Argument'),
       '#default_value' => $this->configuration['view_arg'],
       '#field_suffix' => ' ' ,
 

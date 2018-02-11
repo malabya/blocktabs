@@ -72,7 +72,7 @@ class BlocktabsEditForm extends BlocktabsFormBase {
       '#attributes' => array(
         'id' => 'blocktabs-tabs',
       ),
-      '#empty' => t('There are currently no tabs in this blocktabs. Add one by selecting an option below.'),
+      '#empty' => $this->t('There are currently no tabs in this blocktabs. Add one by selecting an option below.'),
       // Render tabs below parent elements.
       '#weight' => 5,
     );
