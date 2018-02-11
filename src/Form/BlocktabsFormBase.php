@@ -56,6 +56,7 @@ abstract class BlocktabsFormBase extends EntityForm {
       '#default_value' => $this->entity->label(),
       '#required' => TRUE,
     );
+
     $form['name'] = array(
       '#type' => 'machine_name',
       '#machine_name' => array(
@@ -64,6 +65,21 @@ abstract class BlocktabsFormBase extends EntityForm {
       '#default_value' => $this->entity->id(),
       '#required' => TRUE,
     );
+
+    $default_event = $this->entity->getEvent();
+    if(empty($default_event)){
+       $default_event = 'mouseover';
+	}
+    $form['event'] = [
+      '#type' => 'radios',
+      '#title' => $this->t('Select an event'),
+      '#default_value' => $default_event,
+      '#options' => [
+        'mouseover' => $this->t('Mouseover'),
+		'click' => $this->t('Click')
+      ],
+    ];
+	
 
     return parent::form($form, $form_state);
   }

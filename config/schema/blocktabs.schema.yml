@@ -7,6 +7,9 @@ blocktabs.blocktabs.*:
     label:
       type: string
       label: 'Label'
+    event:
+      type: string
+      label: 'Event'
     tabs:
       type: sequence
       sequence:
@@ -22,7 +25,7 @@ blocktabs.blocktabs.*:
           weight:
             type: integer
           uuid:
-            type: string
+            type: string         
 blocktabs.tab.*:
   type: mapping
   label: 'Tab settings'

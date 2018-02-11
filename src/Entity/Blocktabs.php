@@ -39,6 +39,7 @@ use Drupal\blocktabs\TabPluginCollection;
  *     "name",
  *     "label",
  *     "tabs",
+ *     "event" 
  *   }
  * )
  */
@@ -58,6 +59,12 @@ class Blocktabs extends ConfigEntityBase implements BlocktabsInterface, EntityWi
    * @var string
    */
   protected $label;
+
+  /**
+   * Selected event Hover or Click
+   *
+   */
+  protected $event;  
 
   /**
    * The array of tabs for this blocktabs.
@@ -209,5 +216,12 @@ class Blocktabs extends ConfigEntityBase implements BlocktabsInterface, EntityWi
     }
     return $max_age;
   }
+  
+  /**
+   * {@inheritdoc}
+   */
+  public function getEvent(){
+    return $this->get('event');
+  }  
 
 }

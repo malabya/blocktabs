@@ -18,9 +18,16 @@
   Drupal.behaviors.blocktabs = {
     attach: function (context, settings) {
       $(context).find('div.blocktabs').each(function () {
-        $(this).tabs({
-         event: "mouseover"
-        });
+        if($(this).hasClass( "click" )){
+          $(this).tabs({
+            event: "click"
+          });          			
+        }
+        else{
+          $(this).tabs({
+            event: "mouseover"
+          });
+        }
       });
     }
   };

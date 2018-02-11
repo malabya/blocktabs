@@ -28,7 +28,7 @@
  */
 #}
 {{ attach_library('blocktabs/blocktabs') }}
-<div id="{{ tabs_id }}" class="blocktabs">
+<div id="{{ tabs_id }}"{{ attributes }}>
 <ul>
 {% for tab in tabs %}
 <li><a href="#{{ tab.id }}">{{ tab.title }}</a></li>
