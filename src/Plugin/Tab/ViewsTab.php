@@ -93,7 +93,7 @@ class ViewsTab extends ConfigurableTabBase {
       '#prefix' => '<div id="edit-view-display-wrapper">',
       '#suffix' => '</div>',
 	  '#options' => $display_options,
-      //'#validated' => TRUE,	 
+      '#validated' => TRUE,	 
       '#required' => TRUE,
     );
 	/*
