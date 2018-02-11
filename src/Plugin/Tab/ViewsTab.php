@@ -6,6 +6,8 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\blocktabs\ConfigurableTabBase;
 use Drupal\blocktabs\BlocktabsInterface;
 use Drupal\views\Views;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\ReplaceCommand;
 
 /**
  * views tab.
@@ -58,7 +60,7 @@ class ViewsTab extends ConfigurableTabBase {
   /**
    * {@inheritdoc}
    */
-  public function buildConfigurationForm(array $form, FormStateInterface $form_state, $view_name = NULL) {
+  public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
 	$view_options = Views::getViewsAsOptions(TRUE, 'all', NULL, FALSE, TRUE);
     $form['view_name'] = array(
       '#type' => 'select',
@@ -66,8 +68,9 @@ class ViewsTab extends ConfigurableTabBase {
 	  '#options' => $view_options,
       '#default_value' => $this->configuration['view_name'],
       '#field_suffix' => ' ' ,
+	  //Drupal\blocktabs\Plugin\Tab\ViewsTab
       '#ajax' => [
-	    'callback' => array($this, 'updateDisplay'),
+	   'callback' => array($this, 'updateDisplay'),
         'wrapper' => 'edit-view-display-wrapper',
       ], 
       '#required' => TRUE,
@@ -80,6 +83,9 @@ class ViewsTab extends ConfigurableTabBase {
         $display_options[$name] = $display['display_title'];
       }	
 	}
+	
+
+	
     $form['view_display'] = array(
       '#type' => 'select',
       '#title' => t('Display'),
@@ -87,9 +93,17 @@ class ViewsTab extends ConfigurableTabBase {
       '#prefix' => '<div id="edit-view-display-wrapper">',
       '#suffix' => '</div>',
 	  '#options' => $display_options,
-      '#validated' => TRUE,	 
+      //'#validated' => TRUE,	 
+      '#required' => TRUE,
+    );
+	/*
+    $form['view_display'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Display'),
+      '#default_value' => $this->configuration['view_display'],
       '#required' => TRUE,
     );	
+*/	
     $form['view_arg'] = array(
       '#type' => 'textfield',
       '#title' => t('Argument'),
@@ -113,7 +127,14 @@ class ViewsTab extends ConfigurableTabBase {
       }	
 	}	
     $form['data']['view_display']['#options'] = $display_options;
-    return $form['data']['view_display'];
+	
+    $form_state->get('rerender', TRUE);
+    $form_state->setRebuild();
+	
+    $response = new AjaxResponse();
+    $response->addCommand(new ReplaceCommand('#edit-view-display-wrapper',  drupal_render($form['data']['view_display'])));
+    return $response;		
+    //return $form['data']['view_display'];
   }
 
   /**
