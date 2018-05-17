@@ -7,7 +7,7 @@ use Drupal\blocktabs\ConfigurableTabBase;
 use Drupal\blocktabs\BlocktabsInterface;
 
 /**
- * block content tab.
+ * Block content tab.
  *
  * @Tab(
  *   id = "block_content_tab",

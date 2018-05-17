@@ -10,7 +10,7 @@ use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\ReplaceCommand;
 
 /**
- * views tab.
+ * Views tab.
  *
  * @Tab(
  *   id = "views_tab",
@@ -32,13 +32,13 @@ class ViewsTab extends ConfigurableTabBase {
    */
   public function getSummary() {
     $markup = $this->t('view name:') . $this->configuration['view_name'] . '; ';
-	$markup .= $this->t('display:') . $this->configuration['view_display'] . '; ';
-    if(!empty($this->configuration['view_arg'])){
-	  $markup .= $this->t('argument:') . $this->configuration['view_arg'];
+    $markup .= $this->t('display:') . $this->configuration['view_display'] . '; ';
+    if (!empty($this->configuration['view_arg'])) {
+      $markup .= $this->t('argument:') . $this->configuration['view_arg'];
     }
-    $summary = array(
+    $summary = [
       '#markup' => '(' . $markup . ')',
-    ); 
+    ];
 
     return $summary;
   }
@@ -47,11 +47,11 @@ class ViewsTab extends ConfigurableTabBase {
    * {@inheritdoc}
    */
   public function defaultConfiguration() {
-    return array(
+    return [
       'view_name' => NULL,
       'view_display' => NULL,
       'view_arg' => NULL,
-    );
+    ];
   }
 
   /**
@@ -59,19 +59,19 @@ class ViewsTab extends ConfigurableTabBase {
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $view_options = Views::getViewsAsOptions(TRUE, 'all', NULL, FALSE, TRUE);
-    $form['view_name'] = array(
+    $form['view_name'] = [
       '#type' => 'select',
       '#title' => $this->t('view name'),
       '#options' => $view_options,
       '#default_value' => $this->configuration['view_name'],
       '#field_suffix' => '',
-	  //Drupal\blocktabs\Plugin\Tab\ViewsTab
+      // Drupal\blocktabs\Plugin\Tab\ViewsTab.
       '#ajax' => [
-        'callback' => array($this, 'updateDisplay'),
+        'callback' => [$this, 'updateDisplay'],
         'wrapper' => 'edit-view-display-wrapper',
       ],
       '#required' => TRUE,
-    );
+    ];
 
     $display_options = [];
     if ($this->configuration['view_name']) {
@@ -81,7 +81,7 @@ class ViewsTab extends ConfigurableTabBase {
       }
     }
 
-    $form['view_display'] = array(
+    $form['view_display'] = [
       '#type' => 'select',
       '#title' => $this->t('Display'),
       '#default_value' => $this->configuration['view_display'],
@@ -90,45 +90,37 @@ class ViewsTab extends ConfigurableTabBase {
       '#options' => $display_options,
       '#validated' => TRUE,
       '#required' => TRUE,
-    );
-	/*
-    $form['view_display'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Display'),
-      '#default_value' => $this->configuration['view_display'],
-      '#required' => TRUE,
-    );	
-*/	
-    $form['view_arg'] = array(
+    ];
+
+    $form['view_arg'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Argument'),
       '#default_value' => $this->configuration['view_arg'],
       '#field_suffix' => '',
-    );		
+    ];	
     return $form;
   }
   public function updateDisplay($form, FormStateInterface $form_state) {
 
     $form['data']['view_display']['#default_value'] = '';
-	$data =$form_state->getValue('data');
-	$view_name = isset($data['view_name']) ? $data['view_name'] : '';
+    $data =$form_state->getValue('data');
+    $view_name = isset($data['view_name']) ? $data['view_name'] : '';
 
-	$display_options = [];
+    $display_options = [];
     if ($view_name) {
       $view = Views::getView($view_name);
       foreach ($view->storage->get('display') as $name => $display) {
         $display_options[$name] = $display['display_title'] . ' (' . $display['id'] . ')';
-      }	
-	}	
+      }
+    }
     $form['data']['view_display']['#options'] = $display_options;
-	
+
     $form_state->get('rerender', TRUE);
     $form_state->setRebuild();
-	
+
     $response = new AjaxResponse();
     $response->addCommand(new ReplaceCommand('#edit-view-display-wrapper',  drupal_render($form['data']['view_display'])));
-    return $response;		
-    //return $form['data']['view_display'];
+    return $response;
   }
 
   /**
