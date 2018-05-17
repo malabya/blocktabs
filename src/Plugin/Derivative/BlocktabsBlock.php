@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class BlocktabsBlock extends DeriverBase implements ContainerDeriverInterface {
 
   /**
-   * The menu storage.
+   * The entity storage.
    *
    * @var \Drupal\Core\Entity\EntityStorageInterface
    */
@@ -24,8 +24,8 @@ class BlocktabsBlock extends DeriverBase implements ContainerDeriverInterface {
   /**
    * Constructs new SystemMenuBlock.
    *
-   * @param \Drupal\Core\Entity\EntityStorageInterface $menu_storage
-   *   The menu storage.
+   * @param \Drupal\Core\Entity\EntityStorageInterface $entity_storage
+   *   The entity storage.
    */
   public function __construct(EntityStorageInterface $entity_storage) {
     $this->entityStorage = $entity_storage;
@@ -47,7 +47,7 @@ class BlocktabsBlock extends DeriverBase implements ContainerDeriverInterface {
     foreach ($this->entityStorage->loadMultiple() as $blocktabs => $entity) {
       $this->derivatives[$blocktabs] = $base_plugin_definition;
       $this->derivatives[$blocktabs]['admin_label'] = 'Blocktabs:' . $entity->label();
-      $this->derivatives[$blocktabs]['config_dependencies']['config'] = array($entity->getConfigDependencyName());
+      $this->derivatives[$blocktabs]['config_dependencies']['config'] = [$entity->getConfigDependencyName()];
     }
     return $this->derivatives;
   }

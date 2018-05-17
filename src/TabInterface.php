@@ -17,7 +17,7 @@ use Drupal\blocktabs\BlocktabsInterface;
  * @see \Drupal\blocktabs\TabManager
  * @see plugin_api
  */
-interface TabInterface extends PluginInspectionInterface, ConfigurablePluginInterface, ContextAwarePluginInterface  {
+interface TabInterface extends PluginInspectionInterface, ConfigurablePluginInterface, ContextAwarePluginInterface {
 
   /**
    * Applies a tab to the blocktabs.
@@ -30,10 +30,8 @@ interface TabInterface extends PluginInspectionInterface, ConfigurablePluginInte
    */
   public function addTab(BlocktabsInterface $blocktabs);
 
-
   /**
-   * Returns the extension the derivative would have have after adding this
-   * tab.
+   * Returns the extension the derivative would have have after adding this tab.
    *
    * @param string $extension
    *   The tab extension the derivative has before adding.
@@ -101,7 +99,7 @@ interface TabInterface extends PluginInspectionInterface, ConfigurablePluginInte
    *
    * @return $this
    */
-  public function setTitle($title);  
+  public function setTitle($title);
 
   /**
    * Returns the content of the tab.
@@ -109,6 +107,6 @@ interface TabInterface extends PluginInspectionInterface, ConfigurablePluginInte
    * @return string
    *   The content of the tab.
    */
-  public function getContent();  
+  public function getContent();
 
 }

@@ -62,11 +62,11 @@ class BlocktabsEditForm extends BlocktabsFormBase {
         $this->t('Operations'),
       ],
       '#tabledrag' => [
-        array(
+        [
           'action' => 'order',
           'relationship' => 'sibling',
           'group' => 'tab-order-weight',
-        ),
+        ],
       ],
       '#attributes' => [
         'id' => 'blocktabs-tabs',
@@ -144,7 +144,7 @@ class BlocktabsEditForm extends BlocktabsFormBase {
       '#weight' => isset($user_input['weight']) ? $user_input['weight'] : NULL,
       '#attributes' => ['class' => ['draggable']],
     ];
-    $form['tabs']['new']['tab'] =[
+    $form['tabs']['new']['tab'] = [
       'data' => [
         'new' => [
           '#type' => 'select',
@@ -166,7 +166,7 @@ class BlocktabsEditForm extends BlocktabsFormBase {
       '#suffix' => '</div>',
     ];
 
-    $form['tabs']['new']['weight'] =[
+    $form['tabs']['new']['weight'] = [
       '#type' => 'weight',
       '#title' => $this->t('Weight for new tab'),
       '#title_display' => 'invisible',
