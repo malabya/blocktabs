@@ -64,42 +64,42 @@ abstract class TabFormBase extends FormBase {
     }
 
     $form['#attached']['library'][] = 'blocktabs/admin';
-    $form['uuid'] = array(
+    $form['uuid'] = [
       '#type' => 'hidden',
       '#value' => $this->tab->getUuid(),
-    );
-    $form['id'] = array(
+    ];
+    $form['id'] = [
       '#type' => 'hidden',
       '#value' => $this->tab->getPluginId(),
-    );
-	
-    $form['title'] = array(
+    ];
+
+    $form['title'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Tab title'),
       '#default_value' => $this->tab->getTitle(),
       '#required' => TRUE,
-    );
+    ];
 
     $form['data'] = $this->tab->buildConfigurationForm(array(), $form_state);
     $form['data']['#tree'] = TRUE;
 
     // Check the URL for a weight, then the tab, otherwise use default.
-    $form['weight'] = array(
+    $form['weight'] = [
       '#type' => 'hidden',
       '#value' => $request->query->has('weight') ? (int) $request->query->get('weight') : $this->tab->getWeight(),
-    );
+    ];
 
-    $form['actions'] = array('#type' => 'actions');
-    $form['actions']['submit'] = array(
+    $form['actions'] = ['#type' => 'actions'];
+    $form['actions']['submit'] = [
       '#type' => 'submit',
       '#button_type' => 'primary',
-    );
-    $form['actions']['cancel'] = array(
+    ];
+    $form['actions']['cancel'] = [
       '#type' => 'link',
       '#title' => $this->t('Cancel'),
       '#url' => $this->blocktabs->urlInfo('edit-form'),
       '#attributes' => ['class' => ['button']],
-    );
+    ];
     return $form;
   }
 

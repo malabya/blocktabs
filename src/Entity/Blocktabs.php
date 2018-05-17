@@ -66,7 +66,7 @@ class Blocktabs extends ConfigEntityBase implements BlocktabsInterface, EntityWi
    *
    * @var string
    */
-  protected $event;  
+  protected $event;
 
   /**
    * The blocktabs style, default, vertical.
@@ -215,7 +215,7 @@ class Blocktabs extends ConfigEntityBase implements BlocktabsInterface, EntityWi
     }
     return $max_age;
   }
-  
+
   /**
    * {@inheritdoc}
    */
