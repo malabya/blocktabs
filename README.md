@@ -5,7 +5,8 @@ Block tabs, this module provide basic tabs function for Drupal.
 
 Different from quicktabs module:
 
- * quicktabs do not have a workable version in Drupal 8, this module provide Drupal8 version only.
+ * quicktabs do not have a workable version in Drupal 8, this module provide
+   Drupal8 version only.
  * Deep integration with Drupal8's API, Plugin, Block, Entity and Config API.
  * Provide simple tabs functions, you can control the CSS by your self.
  * base on jquery.ui.tabs.
@@ -29,9 +30,13 @@ CONFIGURATION
 -------------
  
  * When enabled, in order to configure follow these steps:
-   - 1) add a blocktabs at admin/structure/blocktabs, for example "Blocktabs test"
-   - 2) add views tab to "Blocktabs test", add custom block content tab to "Blocktabs test", it support "views tab", "block content tab", "block plugin tab"
-   - 3) navigate to admin/structure/block/list/bartik, click the "Place block" button, you could see "Blocktabs: Blocktabs Test", you can use it now.
+   - 1) add a blocktabs at admin/structure/blocktabs, 
+        for example "Blocktabs test"
+   - 2) add views tab to "Blocktabs test", add custom block content tab to 
+        "Blocktabs test", it support "views tab", "block content tab",
+		"block plugin tab"
+   - 3) navigate to admin/structure/block/list/bartik, click the "Place block"
+        button, you could see "Blocktabs: Blocktabs Test", you can use it now.
    - 4) you could use it on panels config page.
 
 MAINTAINERS
