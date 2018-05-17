@@ -3,7 +3,6 @@
 namespace Drupal\blocktabs\Plugin\Tab;
 
 use Drupal\Core\Block\BlockManagerInterface;
-use Drupal\Core\Block\BlockPluginInterface;
 use Psr\Log\LoggerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\blocktabs\ConfigurableTabBase;
@@ -20,12 +19,17 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * )
  */
 class BlockTab extends ConfigurableTabBase {
+
   /**
+   * The block manager.
+   *  
    * @var \Drupal\Core\Block\BlockManagerInterface
    */
   protected $blockManager;
 
   /**
+   * The block plugin.
+   *  
    * @var \Drupal\Core\Block\BlockPluginInterface
    */
   protected $blockPlugin;
@@ -88,7 +92,7 @@ class BlockTab extends ConfigurableTabBase {
 
     $options = [];
     foreach ($definitions as $group => $blocks) {
-      $options[$group] = array();
+      $options[$group] = [];
 
       foreach ($blocks as $id => $block) {
         $options[$group][$id] = $block['admin_label'];
