@@ -29,7 +29,7 @@ class TabDeleteForm extends ConfirmFormBase {
    * {@inheritdoc}
    */
   public function getQuestion() {
-    return $this->t('Are you sure you want to delete the @tab tab from the %blocktabs blocktabs?', array('%blocktabs' => $this->blockTabs->label(), '@tab' => $this->tab->label()));
+    return $this->t('Are you sure you want to delete the @tab tab from the %blocktabs blocktabs?', ['%blocktabs' => $this->blockTabs->label(), '@tab' => $this->tab->label()]);
   }
 
   /**
@@ -68,7 +68,7 @@ class TabDeleteForm extends ConfirmFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->blockTabs->deleteTab($this->tab);
-    drupal_set_message($this->t('The tab %name has been deleted.', array('%name' => $this->tab->label())));
+    drupal_set_message($this->t('The tab %name has been deleted.', ['%name' => $this->tab->label()]));
     $form_state->setRedirectUrl($this->blockTabs->urlInfo('edit-form'));
   }
 

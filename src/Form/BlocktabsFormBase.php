@@ -50,48 +50,48 @@ abstract class BlocktabsFormBase extends EntityForm {
    */
   public function form(array $form, FormStateInterface $form_state) {
 
-    $form['label'] = array(
+    $form['label'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Blocktabs name'),
       '#default_value' => $this->entity->label(),
       '#required' => TRUE,
-    );
+    ];
 
-    $form['name'] = array(
+    $form['name'] = [
       '#type' => 'machine_name',
-      '#machine_name' => array(
-        'exists' => array($this->entityStorage, 'load'),
-      ),
+      '#machine_name' => [
+        'exists' => [$this->entityStorage, 'load'],
+      ],
       '#default_value' => $this->entity->id(),
       '#required' => TRUE,
-    );
+    ];
 
     $default_event = $this->entity->getEvent();
-    if(empty($default_event)){
-       $default_event = 'mouseover';
-	}
+    if (empty($default_event)) {
+      $default_event = 'mouseover';
+    }
     $form['event'] = [
       '#type' => 'radios',
       '#title' => $this->t('Select an event'),
       '#default_value' => $default_event,
       '#options' => [
         'mouseover' => $this->t('Mouseover'),
-		'click' => $this->t('Click')
+        'click' => $this->t('Click'),
       ],
     ];
-	
+
     $default_style = $this->entity->getStyle();
-    if(empty($default_style)){
-       $default_style = 'default';
-	}	
+    if (empty($default_style)) {
+      $default_style = 'default';
+    }
     $form['style'] = [
       '#type' => 'radios',
       '#title' => $this->t('Style'),
       '#default_value' => $default_style,
       '#options' => [
         'default' => $this->t('Default tabs'),
-		'vertical' => $this->t('Vertical tabs')
-      ],	  
+        'vertical' => $this->t('Vertical tabs'),
+      ],
     ];
     return parent::form($form, $form_state);
   }
