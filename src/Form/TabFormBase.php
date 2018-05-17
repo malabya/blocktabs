@@ -82,8 +82,6 @@ abstract class TabFormBase extends FormBase {
 	
     $form['data'] = $this->tab->buildConfigurationForm(array(), $form_state);
     $form['data']['#tree'] = TRUE;
-	
-	//drupal_set_message('term_id:' . var_export($form['data']));
 
     // Check the URL for a weight, then the tab, otherwise use default.
     $form['weight'] = array(
