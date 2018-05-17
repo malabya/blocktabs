@@ -27,7 +27,7 @@ class BlocktabsBlock extends BlockBase implements ContainerFactoryPluginInterfac
   /**
    * The Plugin Block Manager.
    *
-   * @var \Drupal\Core\Block\BlockManagerInterface.
+   * @var \Drupal\Core\Block\BlockManagerInterface
    */
   protected $blockManager;
 
@@ -59,10 +59,12 @@ class BlocktabsBlock extends BlockBase implements ContainerFactoryPluginInterfac
    *   A configuration array containing information about the plugin instance.
    * @param string $plugin_id
    *   The plugin_id for the plugin instance.
-   * @param array $plugin_definition
+   * @param mixed $plugin_definition
    *   The plugin implementation definition.
-   * @param \Drupal\blocktabs\BlocktabsInterface $blocktabs
-   *   The blocktabs service.
+   * @param \Drupal\Core\Block\BlockManagerInterface $block_manager
+   *   The block manager.
+   * @param \Drupal\Core\Entity\EntityManagerInterface $entity_manager
+   *   The entity manager.   
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, BlockManagerInterface $block_manager, EntityManagerInterface $entity_manager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
@@ -107,17 +109,16 @@ class BlocktabsBlock extends BlockBase implements ContainerFactoryPluginInterfac
 
   }
 
-
   /**
    * {@inheritdoc}
    */
   public function build() {
 
     $blocktabs_entity = $this->getEntity();
-    $build['block'] = array(
+    $build['block'] = [
       '#theme' => 'blocktabs',
       '#blocktabs' => $blocktabs_entity,
-    );
+    ];
 
     return $build;
   }
