@@ -49,45 +49,44 @@ class BlocktabsEditForm extends BlocktabsFormBase {
    */
   public function form(array $form, FormStateInterface $form_state) {
     $user_input = $form_state->getUserInput();
-    $form['#title'] = $this->t('Edit blocktabs %name', array('%name' => $this->entity->label()));
+    $form['#title'] = $this->t('Edit blocktabs %name', ['%name' => $this->entity->label()]);
     $form['#tree'] = TRUE;
     $form['#attached']['library'][] = 'blocktabs/admin';
 
-
     // Build the list of existing tabs for this blocktabs.
-    $form['tabs'] = array(
+    $form['tabs'] = [
       '#type' => 'table',
-      '#header' => array(
+      '#header' => [
         $this->t('Tab'),
         $this->t('Weight'),
         $this->t('Operations'),
-      ),
-      '#tabledrag' => array(
+      ],
+      '#tabledrag' => [
         array(
           'action' => 'order',
           'relationship' => 'sibling',
           'group' => 'tab-order-weight',
         ),
-      ),
-      '#attributes' => array(
+      ],
+      '#attributes' => [
         'id' => 'blocktabs-tabs',
-      ),
+      ],
       '#empty' => $this->t('There are currently no tabs in this blocktabs. Add one by selecting an option below.'),
       // Render tabs below parent elements.
       '#weight' => 5,
-    );
+    ];
     foreach ($this->entity->getTabs() as $tab) {
       $key = $tab->getUuid();
       $form['tabs'][$key]['#attributes']['class'][] = 'draggable';
       $form['tabs'][$key]['#weight'] = isset($user_input['tabs']) ? $user_input['tabs'][$key]['weight'] : NULL;
-      $form['tabs'][$key]['tab'] = array(
+      $form['tabs'][$key]['tab'] = [
         '#tree' => FALSE,
-        'data' => array(
-          'label' => array(
+        'data' => [
+          'label' => [
             '#plain_text' => $tab->label(),
-          ),
-        ),
-      );
+          ],
+        ],
+      ];
 
       $summary = $tab->getSummary();
 
@@ -96,43 +95,43 @@ class BlocktabsEditForm extends BlocktabsFormBase {
         $form['tabs'][$key]['tab']['data']['summary'] = $summary;
       }
 
-      $form['tabs'][$key]['weight'] = array(
+      $form['tabs'][$key]['weight'] = [
         '#type' => 'weight',
-        '#title' => $this->t('Weight for @title', array('@title' => $tab->label())),
+        '#title' => $this->t('Weight for @title', ['@title' => $tab->label()]),
         '#title_display' => 'invisible',
         '#default_value' => $tab->getWeight(),
         '#delta' => 50,
-        '#attributes' => array(
-          'class' => array('tab-order-weight'),
-        ),
-      );
+        '#attributes' => [
+          'class' => ['tab-order-weight'],
+        ],
+      ];
 
-      $links = array();
+      $links = [];
       $is_configurable = $tab instanceof ConfigurableTabInterface;
       if ($is_configurable) {
-        $links['edit'] = array(
+        $links['edit'] = [
           'title' => $this->t('Edit'),
           'url' => Url::fromRoute('blocktabs.tab_edit_form', [
             'blocktabs' => $this->entity->id(),
             'tab' => $key,
           ]),
-        );
+        ];
       }
-      $links['delete'] = array(
+      $links['delete'] = [
         'title' => $this->t('Delete'),
         'url' => Url::fromRoute('blocktabs.tab_delete', [
           'blocktabs' => $this->entity->id(),
           'tab' => $key,
         ]),
-      );
-      $form['tabs'][$key]['operations'] = array(
+      ];
+      $form['tabs'][$key]['operations'] = [
         '#type' => 'operations',
         '#links' => $links,
-      );
+      ];
     }
 
     // Build the new tab addition form and add it to the tab list.
-    $new_tab_options = array();
+    $new_tab_options = [];
     $tabs = $this->tabManager->getDefinitions();
     uasort($tabs, function ($a, $b) {
       return strcasecmp($a['id'], $b['id']);
@@ -140,43 +139,43 @@ class BlocktabsEditForm extends BlocktabsFormBase {
     foreach ($tabs as $tab => $definition) {
       $new_tab_options[$tab] = $definition['label'];
     }
-    $form['tabs']['new'] = array(
+    $form['tabs']['new'] = [
       '#tree' => FALSE,
       '#weight' => isset($user_input['weight']) ? $user_input['weight'] : NULL,
-      '#attributes' => array('class' => array('draggable')),
-    );
-    $form['tabs']['new']['tab'] = array(
-      'data' => array(
-        'new' => array(
+      '#attributes' => ['class' => ['draggable']],
+    ];
+    $form['tabs']['new']['tab'] =[
+      'data' => [
+        'new' => [
           '#type' => 'select',
           '#title' => $this->t('Tab'),
           '#title_display' => 'invisible',
           '#options' => $new_tab_options,
           '#empty_option' => $this->t('Select a new tab'),
-        ),
-        array(
-          'add' => array(
+        ],
+        [
+          'add' => [
             '#type' => 'submit',
             '#value' => $this->t('Add'),
-            '#validate' => array('::tabValidate'),
-            '#submit' => array('::submitForm', '::tabSave'),
-          ),
-        ),
-      ),
+            '#validate' => ['::tabValidate'],
+            '#submit' => ['::submitForm', '::tabSave'],
+          ],
+        ],
+      ],
       '#prefix' => '<div class="blocktabs-new">',
       '#suffix' => '</div>',
-    );
+    ];
 
-    $form['tabs']['new']['weight'] = array(
+    $form['tabs']['new']['weight'] =[
       '#type' => 'weight',
       '#title' => $this->t('Weight for new tab'),
       '#title_display' => 'invisible',
       '#default_value' => count($this->entity->getTabs()) + 1,
-      '#attributes' => array('class' => array('tab-order-weight')),
-    );
-    $form['tabs']['new']['operations'] = array(
-      'data' => array(),
-    );
+      '#attributes' => ['class' => ['tab-order-weight']],
+    ];
+    $form['tabs']['new']['operations'] = [
+      'data' => [],
+    ];
 
     return parent::form($form, $form_state);
   }
@@ -203,20 +202,20 @@ class BlocktabsEditForm extends BlocktabsFormBase {
     if (is_subclass_of($tab['class'], '\Drupal\blocktabs\ConfigurableTabInterface')) {
       $form_state->setRedirect(
         'blocktabs.tab_add_form',
-        array(
+        [
           'blocktabs' => $this->entity->id(),
           'tab' => $form_state->getValue('new'),
-        ),
-        array('query' => array('weight' => $form_state->getValue('weight')))
+        ],
+        ['query' => ['weight' => $form_state->getValue('weight')]]
       );
     }
     // If there's no form, immediately add the tab.
     else {
-      $tab = array(
+      $tab = [
         'id' => $tab['id'],
-        'data' => array(),
+        'data' => [],
         'weight' => $form_state->getValue('weight'),
-      );
+      ];
       $tab_id = $this->entity->addTab($tab);
       $this->entity->save();
       if (!empty($tab_id)) {
