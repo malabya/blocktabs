@@ -57,7 +57,6 @@ class BlockTab extends ConfigurableTabBase {
   /**
    * {@inheritdoc}data']
    */
-   
   public function addTab(BlocktabsInterface $blocktabs) {
     return TRUE;
   }

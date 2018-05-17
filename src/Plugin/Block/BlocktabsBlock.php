@@ -37,7 +37,7 @@ class BlocktabsBlock extends BlockBase implements ContainerFactoryPluginInterfac
    * @var \Drupal\Core\Entity\EntityManagerInterface
    */
   protected $entityManager;
-  
+
   /**
    * The menu link tree service.
    *
@@ -81,14 +81,13 @@ class BlocktabsBlock extends BlockBase implements ContainerFactoryPluginInterfac
       $container->get('plugin.manager.block'),
       $container->get('entity.manager')
     );
-  }  
+  }
 
   /**
    * {@inheritdoc}
    */
   public function defaultConfiguration() {
-    return array(
-    );
+    return [];
   }
 
   /**
@@ -107,54 +106,22 @@ class BlocktabsBlock extends BlockBase implements ContainerFactoryPluginInterfac
   public function blockSubmit($form, FormStateInterface $form_state) {
 
   }
-  
-  
+
+
   /**
    * {@inheritdoc}
    */
   public function build() {
-  /*
-    if ($blocktabs = $this->getEntity()) {
-      //return $this->entityManager->getViewBuilder($block->getEntityTypeId())->view($block, $this->configuration['view_mode']);
-      $build = array(
-	    '#markup' => 'blocktabs content',
-	  );
-	}
-	*/
-	$blocktabs_entity = $this->getEntity();
-	$build['block'] = array(
-	  '#theme' => 'blocktabs',
-	  '#blocktabs' => $blocktabs_entity,
-	);
-	/*
-	$tabs = $blocktabs_entity->getTabs();
-    $tabs_id = 'blocktabs-' . $blocktabs_entity->id();
-	$titles = '';
-	$titles .= '<ul>';
-	foreach ($tabs as $tab) {
-	  $tab_id = $tabs_id . '-' . $tab->getWeight();
-	  $titles .= '<li><a href="#'. $tab_id .'">' . $tab->getTitle() .'</a></li>';
-	}
-	$titles .= '</ul>';
-	
-	$content = '';
-	//$content .= '<div>';
-	foreach ($tabs as $tab) {
-	  $tab_id = $tabs_id . '-' . $tab->getWeight();
-	  $tab_content_array = $tab->getContent();
-	  $tab_content =  \Drupal::service('renderer')->renderPlain($tab_content_array);
-	  $content .= '<div id="'. $tab_id .'">' . $tab_content .'</div>';
-	}
-	//$content .= '</div>';	
-	//drupal_set_message(var_export($btabs));
+
+    $blocktabs_entity = $this->getEntity();
     $build['block'] = array(
-	    '#markup' => '<div id="' . $tabs_id . '" class="blocktabs">' . $titles . $content . '</div>',
-	);
-	*/
-    //$build['block']['#attached']['library'][] = 'blocktabs/blocktabs';
+      '#theme' => 'blocktabs',
+      '#blocktabs' => $blocktabs_entity,
+    );
+
     return $build;
   }
-  
+
   /**
    * Loads the block content entity of the block.
    *
@@ -163,10 +130,9 @@ class BlocktabsBlock extends BlockBase implements ContainerFactoryPluginInterfac
    */
   protected function getEntity() {
     $id = $this->getDerivativeId();
-	//drupal_set_message('123456:' . $id);
+
     if (!isset($this->blocktabs)) {
       $this->blocktabs = $this->entityManager->getStorage('blocktabs')->load($id);
-	  //drupal_set_message('123456abc:' . $id);
     }
     return $this->blocktabs;
   }

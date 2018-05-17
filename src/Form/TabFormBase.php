@@ -78,8 +78,8 @@ abstract class TabFormBase extends FormBase {
       '#title' => $this->t('Tab title'),
       '#default_value' => $this->tab->getTitle(),
       '#required' => TRUE,
-    );	
-	
+    );
+
     $form['data'] = $this->tab->buildConfigurationForm(array(), $form_state);
     $form['data']['#tree'] = TRUE;
 

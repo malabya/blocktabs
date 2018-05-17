@@ -45,7 +45,6 @@ class BlocktabsBlock extends DeriverBase implements ContainerDeriverInterface {
    */
   public function getDerivativeDefinitions($base_plugin_definition) {
     foreach ($this->entityStorage->loadMultiple() as $blocktabs => $entity) {
-	  //drupal_set_message('123:' . $blocktabs);
       $this->derivatives[$blocktabs] = $base_plugin_definition;
       $this->derivatives[$blocktabs]['admin_label'] = 'Blocktabs:' . $entity->label();
       $this->derivatives[$blocktabs]['config_dependencies']['config'] = array($entity->getConfigDependencyName());

@@ -20,7 +20,6 @@ class BlockContentTab extends ConfigurableTabBase {
   /**
    * {@inheritdoc}
    */
-   
   public function addTab(BlocktabsInterface $blocktabs) {
 
     return TRUE;
@@ -58,7 +57,7 @@ class BlockContentTab extends ConfigurableTabBase {
     );
     foreach ($result as $block_content) {
       $block_uuid_options[$block_content->uuid] = $block_content->info;
-    }  
+    }
     $form['block_uuid'] = array(
       '#type' => 'select',
       '#title' => $this->t('Block uuid'),
@@ -79,12 +78,14 @@ class BlockContentTab extends ConfigurableTabBase {
   }
   
   public function getContent() {
-	$block_render_array = null;
+    $block_render_array = null;
     $block_uuid = $this->configuration['block_uuid'];
-	if(!empty($block_uuid)){
+    if(!empty($block_uuid)){
       $block = \Drupal::entityManager()->loadEntityByUuid('block_content', $block_uuid);
-      $block_render_array = \Drupal::entityManager()->getViewBuilder($block->getEntityTypeId())->view($block, 'default');
-	}
+      $block_render_array = \Drupal::entityManager()
+        ->getViewBuilder($block->getEntityTypeId())
+        ->view($block, 'default');
+    }
     return $block_render_array;
   }
 }

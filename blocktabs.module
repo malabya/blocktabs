@@ -43,10 +43,7 @@ function blocktabs_theme_suggestions_blocktabs(array $variables) {
  */
 function template_preprocess_blocktabs(&$variables) {
   $blocktabs = $variables['elements']['#blocktabs'];
-  //unset($variables['elements']['blocktabs']);
-  //foreach($variables['elements'] as $key => $value){
-  //  drupal_set_message('key:' .$key);
- // }
+
   $tabs_id = 'blocktabs-' . $blocktabs->id();
   $variables['tabs_id'] = $tabs_id;
   $classes_array = [];

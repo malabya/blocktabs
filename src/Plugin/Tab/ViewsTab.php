@@ -23,9 +23,7 @@ class ViewsTab extends ConfigurableTabBase {
   /**
    * {@inheritdoc}
    */
-   
   public function addTab(BlocktabsInterface $blocktabs) {
-
     return TRUE;
   }
 
@@ -51,8 +49,8 @@ class ViewsTab extends ConfigurableTabBase {
   public function defaultConfiguration() {
     return array(
       'view_name' => NULL,
-	  'view_display' => NULL,
-	  'view_arg' => NULL,
+      'view_display' => NULL,
+      'view_arg' => NULL,
     );
   }
 
@@ -60,39 +58,37 @@ class ViewsTab extends ConfigurableTabBase {
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
-	$view_options = Views::getViewsAsOptions(TRUE, 'all', NULL, FALSE, TRUE);
+    $view_options = Views::getViewsAsOptions(TRUE, 'all', NULL, FALSE, TRUE);
     $form['view_name'] = array(
       '#type' => 'select',
       '#title' => $this->t('view name'),
-	  '#options' => $view_options,
+      '#options' => $view_options,
       '#default_value' => $this->configuration['view_name'],
-      '#field_suffix' => ' ' ,
+      '#field_suffix' => '',
 	  //Drupal\blocktabs\Plugin\Tab\ViewsTab
       '#ajax' => [
-	   'callback' => array($this, 'updateDisplay'),
+        'callback' => array($this, 'updateDisplay'),
         'wrapper' => 'edit-view-display-wrapper',
-      ], 
+      ],
       '#required' => TRUE,
     );
 
-	$display_options = [];
+    $display_options = [];
     if ($this->configuration['view_name']) {
       $view = Views::getView($this->configuration['view_name']);
       foreach ($view->storage->get('display') as $name => $display) {
         $display_options[$name] = $display['display_title'] . ' (' . $display['id'] . ')';
-      }	
-	}
-	
+      }
+    }
 
-	
     $form['view_display'] = array(
       '#type' => 'select',
       '#title' => $this->t('Display'),
       '#default_value' => $this->configuration['view_display'],
       '#prefix' => '<div id="edit-view-display-wrapper">',
       '#suffix' => '</div>',
-	  '#options' => $display_options,
-      '#validated' => TRUE,	 
+      '#options' => $display_options,
+      '#validated' => TRUE,
       '#required' => TRUE,
     );
 	/*
@@ -107,8 +103,7 @@ class ViewsTab extends ConfigurableTabBase {
       '#type' => 'textfield',
       '#title' => $this->t('Argument'),
       '#default_value' => $this->configuration['view_arg'],
-      '#field_suffix' => ' ' ,
-
+      '#field_suffix' => '',
     );		
     return $form;
   }
@@ -143,8 +138,8 @@ class ViewsTab extends ConfigurableTabBase {
     parent::submitConfigurationForm($form, $form_state);
 
     $this->configuration['view_name'] = $form_state->getValue('view_name');
-	  $this->configuration['view_display'] = $form_state->getValue('view_display');
-	  $this->configuration['view_arg'] = $form_state->getValue('view_arg');
+    $this->configuration['view_display'] = $form_state->getValue('view_display');
+    $this->configuration['view_arg'] = $form_state->getValue('view_arg');
   }
 
   /**
