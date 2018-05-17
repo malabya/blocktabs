@@ -155,7 +155,7 @@ abstract class TabBase extends ContextAwarePluginBase implements TabInterface, C
    */
   public function setConfiguration(array $configuration) {
     $configuration += [
-      'data' => array(),
+      'data' => [],
       'uuid' => '',
       'title' => '',
       'weight' => '',

@@ -97,13 +97,17 @@ class ViewsTab extends ConfigurableTabBase {
       '#title' => $this->t('Argument'),
       '#default_value' => $this->configuration['view_arg'],
       '#field_suffix' => '',
-    ];	
+    ];
     return $form;
   }
+
+  /**
+   * Update display option.
+   */
   public function updateDisplay($form, FormStateInterface $form_state) {
 
     $form['data']['view_display']['#default_value'] = '';
-    $data =$form_state->getValue('data');
+    $data = $form_state->getValue('data');
     $view_name = isset($data['view_name']) ? $data['view_name'] : '';
 
     $display_options = [];
@@ -119,7 +123,7 @@ class ViewsTab extends ConfigurableTabBase {
     $form_state->setRebuild();
 
     $response = new AjaxResponse();
-    $response->addCommand(new ReplaceCommand('#edit-view-display-wrapper',  drupal_render($form['data']['view_display'])));
+    $response->addCommand(new ReplaceCommand('#edit-view-display-wrapper', drupal_render($form['data']['view_display'])));
     return $response;
   }
 
@@ -142,7 +146,7 @@ class ViewsTab extends ConfigurableTabBase {
     $view_name = $this->configuration['view_name'];
     $view_display = $this->configuration['view_display'];
 
-    $view = \Drupal\views\Views::getView($view_name);
+    $view = Views::getView($view_name);
     $view->setDisplay($view_display);
     $view->execute();
     $count = count($view->result);
@@ -156,4 +160,5 @@ class ViewsTab extends ConfigurableTabBase {
     }
     return $tab_content;
   }
+
 }

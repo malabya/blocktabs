@@ -3,7 +3,6 @@
 namespace Drupal\blocktabs;
 
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
-use Drupal\blocktabs\TabInterface;
 
 /**
  * Provides an interface defining a blocktabs entity.
@@ -28,8 +27,6 @@ interface BlocktabsInterface extends ConfigEntityInterface {
    *   The class instance this method is called on.
    */
   public function setName($name);
-
-
 
   /**
    * Returns a specific tab.
