@@ -62,24 +62,25 @@ class Blocktabs extends ConfigEntityBase implements BlocktabsInterface, EntityWi
   protected $label;
 
   /**
-   * Selected event Hover or Click
+   * Selected event Hover or Click.
    *
+   * @var string
    */
   protected $event;  
-  
+
   /**
-   * The blocktabs style, default, vertical
+   * The blocktabs style, default, vertical.
    *
-   * @var string   
+   * @var string
    */
-  protected $style;  
+  protected $style;
 
   /**
    * The array of tabs for this blocktabs.
    *
    * @var array
    */
-  protected $tabs = array();
+  protected $tabs = [];
 
   /**
    * Holds the collection of tabs that are used by this blocktabs.
@@ -105,20 +106,13 @@ class Blocktabs extends ConfigEntityBase implements BlocktabsInterface, EntityWi
       if (!empty($this->original) && $this->id() !== $this->original->id()) {
         // Update field settings if necessary.
         if (!$this->isSyncing()) {
-          //static::replaceBlockTabs($this);
+
         }
       }
       else {
 
       }
     }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function postDelete(EntityStorageInterface $storage, array $entities) {
-    parent::postDelete($storage, $entities);
   }
 
   /**
@@ -152,7 +146,7 @@ class Blocktabs extends ConfigEntityBase implements BlocktabsInterface, EntityWi
    * {@inheritdoc}
    */
   public function getPluginCollections() {
-    return array('tabs' => $this->getTabs());
+    return ['tabs' => $this->getTabs()];
   }
 
   /**
@@ -225,14 +219,15 @@ class Blocktabs extends ConfigEntityBase implements BlocktabsInterface, EntityWi
   /**
    * {@inheritdoc}
    */
-  public function getEvent(){
+  public function getEvent() {
     return $this->get('event');
-  } 
-  
+  }
+
   /**
    * {@inheritdoc}
    */
-  public function getStyle(){
+  public function getStyle() {
     return $this->get('style');
   }
+
 }
