@@ -22,14 +22,14 @@ class BlockTab extends ConfigurableTabBase {
 
   /**
    * The block manager.
-   *  
+   *
    * @var \Drupal\Core\Block\BlockManagerInterface
    */
   protected $blockManager;
 
   /**
    * The block plugin.
-   *  
+   *
    * @var \Drupal\Core\Block\BlockPluginInterface
    */
   protected $blockPlugin;

@@ -5,7 +5,6 @@ namespace Drupal\blocktabs\Plugin\Block;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Block\BlockBase;
-use Drupal\blocktabs\BlocktabsInterface;
 use Drupal\Core\Block\BlockManagerInterface;
 use Drupal\Core\Entity\EntityManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
@@ -64,7 +63,7 @@ class BlocktabsBlock extends BlockBase implements ContainerFactoryPluginInterfac
    * @param \Drupal\Core\Block\BlockManagerInterface $block_manager
    *   The block manager.
    * @param \Drupal\Core\Entity\EntityManagerInterface $entity_manager
-   *   The entity manager.   
+   *   The entity manager.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, BlockManagerInterface $block_manager, EntityManagerInterface $entity_manager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
