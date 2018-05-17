@@ -29,11 +29,11 @@ class BlockContentTab extends ConfigurableTabBase {
    * {@inheritdoc}
    */
   public function getSummary() {
-  
-    $summary = array(
+
+    $summary = [
       '#markup' => '(' . $this->t('block uuid:') . $this->configuration['block_uuid'] . ')',
-    );
-    //$summary = parent::getSummary();
+    ];
+
     return $summary;
   }
 
@@ -41,9 +41,9 @@ class BlockContentTab extends ConfigurableTabBase {
    * {@inheritdoc}
    */
   public function defaultConfiguration() {
-    return array(
+    return [
       'block_uuid' => NULL,
-    );
+    ];
   }
 
   /**
@@ -52,19 +52,19 @@ class BlockContentTab extends ConfigurableTabBase {
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $sql = "SELECT bd.info, b.uuid FROM {block_content_field_data} bd LEFT JOIN {block_content} b ON bd.id = b.id";
     $result = db_query($sql);
-    $block_uuid_options = array(
+    $block_uuid_options = [
       '' => $this->t('- Select -'),
-    );
+    ];
     foreach ($result as $block_content) {
       $block_uuid_options[$block_content->uuid] = $block_content->info;
     }
-    $form['block_uuid'] = array(
+    $form['block_uuid'] = [
       '#type' => 'select',
       '#title' => $this->t('Block uuid'),
       '#options' => $block_uuid_options,
       '#default_value' => $this->configuration['block_uuid'],
       '#required' => TRUE,
-    );
+    ];
     return $form;
   }
 
@@ -76,11 +76,14 @@ class BlockContentTab extends ConfigurableTabBase {
 
     $this->configuration['block_uuid'] = $form_state->getValue('block_uuid');
   }
-  
+
+  /**
+   * {@inheritdoc}
+   */
   public function getContent() {
-    $block_render_array = null;
+    $block_render_array = NULL;
     $block_uuid = $this->configuration['block_uuid'];
-    if(!empty($block_uuid)){
+    if (!empty($block_uuid)) {
       $block = \Drupal::entityManager()->loadEntityByUuid('block_content', $block_uuid);
       $block_render_array = \Drupal::entityManager()
         ->getViewBuilder($block->getEntityTypeId())
@@ -88,4 +91,5 @@ class BlockContentTab extends ConfigurableTabBase {
     }
     return $block_render_array;
   }
+
 }
