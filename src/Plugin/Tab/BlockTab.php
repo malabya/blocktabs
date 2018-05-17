@@ -11,7 +11,7 @@ use Drupal\blocktabs\BlocktabsInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * block tab.
+ * Block tab.
  *
  * @Tab(
  *   id = "block_tab",
@@ -30,7 +30,7 @@ class BlockTab extends ConfigurableTabBase {
    */
   protected $blockPlugin;
 
-  /**in
+  /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
@@ -55,7 +55,7 @@ class BlockTab extends ConfigurableTabBase {
   }
 
   /**
-   * {@inheritdoc}data']
+   * {@inheritdoc}
    */
   public function addTab(BlocktabsInterface $blocktabs) {
     return TRUE;
@@ -65,9 +65,9 @@ class BlockTab extends ConfigurableTabBase {
    * {@inheritdoc}
    */
   public function getSummary() {
-    $summary = array(
+    $summary = [
       '#markup' => '(' . $this->t('Block plugin id:') . $this->configuration['block_id'] . ')',
-    ); 
+    ];
     return $summary;
   }
 
@@ -75,9 +75,9 @@ class BlockTab extends ConfigurableTabBase {
    * {@inheritdoc}
    */
   public function defaultConfiguration() {
-    return array(
+    return [
       'block_id' => NULL,
-    );
+    ];
   }
 
   /**
@@ -86,7 +86,7 @@ class BlockTab extends ConfigurableTabBase {
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $definitions = $this->blockManager->getGroupedDefinitions();
 
-    $options = array();
+    $options = [];
     foreach ($definitions as $group => $blocks) {
       $options[$group] = array();
 
@@ -95,13 +95,13 @@ class BlockTab extends ConfigurableTabBase {
       }
     }
 
-    $form['block_id'] = array(
+    $form['block_id'] = [
       '#type' => 'select',
       '#title' => $this->t('Block id'),
       '#options' => $options,
       '#default_value' => $this->configuration['block_id'],
       '#required' => TRUE,
-    );
+    ];
     return $form;
   }
 
@@ -113,7 +113,10 @@ class BlockTab extends ConfigurableTabBase {
 
     $this->configuration['block_id'] = $form_state->getValue('block_id');
   }
-  
+
+  /**
+   * {@inheritdoc}
+   */
   public function getContent() {
     return $this->blockPlugin->build();
   }
