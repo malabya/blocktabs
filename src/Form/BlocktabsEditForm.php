@@ -101,6 +101,7 @@ class BlocktabsEditForm extends BlocktabsFormBase {
         '#title' => $this->t('Weight for @title', array('@title' => $tab->label())),
         '#title_display' => 'invisible',
         '#default_value' => $tab->getWeight(),
+        '#delta' => 50,
         '#attributes' => array(
           'class' => array('tab-order-weight'),
         ),
