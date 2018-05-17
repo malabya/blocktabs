@@ -144,20 +144,30 @@ class ViewsTab extends ConfigurableTabBase {
     parent::submitConfigurationForm($form, $form_state);
 
     $this->configuration['view_name'] = $form_state->getValue('view_name');
-	$this->configuration['view_display'] = $form_state->getValue('view_display');
-	$this->configuration['view_arg'] = $form_state->getValue('view_arg');
+	  $this->configuration['view_display'] = $form_state->getValue('view_display');
+	  $this->configuration['view_arg'] = $form_state->getValue('view_arg');
   }
 
   /**
    * {@inheritdoc}
-   */  
+   */
   public function getContent() {
     $tab_content = '';
     $view_name = $this->configuration['view_name'];
     $view_display = $this->configuration['view_display'];
-    $view_arg = !empty($this->configuration['view_arg']) ? $this->configuration['view_arg'] : NULL;
-    $tab_view = views_embed_view($view_name, $view_display, $view_arg);	
-	//$tab_content =  \Drupal::service('renderer')->render($tab_view);
-    return $tab_view;
+
+    $view = \Drupal\views\Views::getView($view_name);
+    $view->setDisplay($view_display);
+    $view->execute();
+    $count = count($view->result);
+    $tab_view = $view->render();
+
+    if ($count > 0) {
+      $tab_content = \Drupal::service('renderer')->render($tab_view);
+    }
+    else {
+      $tab_content = NULL;
+    }
+    return $tab_content;
   }
 }

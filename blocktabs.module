@@ -47,7 +47,6 @@ function template_preprocess_blocktabs(&$variables) {
   //foreach($variables['elements'] as $key => $value){
   //  drupal_set_message('key:' .$key);
  // }
-  
   $tabs_id = 'blocktabs-' . $blocktabs->id();
   $variables['tabs_id'] = $tabs_id;
   $classes_array = [];
@@ -59,19 +58,20 @@ function template_preprocess_blocktabs(&$variables) {
   $style = $blocktabs->getStyle();
   if(!empty($style)){
     $classes_array[] = $style;
-  } 
+  }
   $variables['attributes']['class'] = $classes_array;
   $variables['tabs'] = array();
   $tabs = $blocktabs->getTabs();
-	foreach ($tabs as $tab) {
-	  $tab_id = $tabs_id . '-' . $tab->getWeight();
-	  $tab_obj = new stdClass(); 
-	  $tab_obj->title = $tab->getTitle();
-	  $tab_obj->id = $tab_id;
-	  $tab_obj->content = $tab->getContent();
-	  $variables['tabs'][$tab_id] = $tab_obj;
-	  
-	}  
 
+  foreach ($tabs as $tab) {
+    $tab_id = $tabs_id . '-' . $tab->getWeight();
+    $tab_obj = new stdClass();
+    $tab_obj->title = $tab->getTitle();
+    $tab_obj->id = $tab_id;
+    $tab_obj->content = $tab->getContent();
 
+    if (!empty($tab_obj->content)) {
+      $variables['tabs'][$tab_id] = $tab_obj;
+    }
+  }
 }
