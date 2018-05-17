@@ -41,7 +41,6 @@ class ViewsTab extends ConfigurableTabBase {
     $summary = array(
       '#markup' => '(' . $markup . ')',
     ); 
-    //$summary = parent::getSummary();
 
     return $summary;
   }
