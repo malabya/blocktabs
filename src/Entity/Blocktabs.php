@@ -119,9 +119,6 @@ class Blocktabs extends ConfigEntityBase implements BlocktabsInterface, EntityWi
    */
   public static function postDelete(EntityStorageInterface $storage, array $entities) {
     parent::postDelete($storage, $entities);
-
-    foreach ($entities as $blocktabs) {
-    }
   }
 
   /**
