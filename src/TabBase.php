@@ -32,7 +32,7 @@ abstract class TabBase extends ContextAwarePluginBase implements TabInterface, C
    * @var int|string
    */
   protected $weight = '';
-  
+
   /**
    * The title of the tab.
    *
@@ -69,7 +69,6 @@ abstract class TabBase extends ContextAwarePluginBase implements TabInterface, C
     );
   }
 
-
   /**
    * {@inheritdoc}
    */
@@ -84,14 +83,14 @@ abstract class TabBase extends ContextAwarePluginBase implements TabInterface, C
    * {@inheritdoc}
    */
   public function getSummary() {
-    return array(
+    return [
       '#markup' => '',
-      '#tab' => array(
+      '#tab' => [
         'id' => $this->pluginDefinition['id'],
         'label' => $this->label(),
         'description' => $this->pluginDefinition['description'],
-      ),
-    );
+      ],
+    ];
   }
 
   /**
@@ -137,30 +136,30 @@ abstract class TabBase extends ContextAwarePluginBase implements TabInterface, C
   public function getTitle() {
     return $this->title;
   }
-  
+
   /**
    * {@inheritdoc}
    */
   public function getConfiguration() {
-    return array(
+    return [
       'uuid' => $this->getUuid(),
       'id' => $this->getPluginId(),
       'title' => $this->getTitle(),
       'weight' => $this->getWeight(),
       'data' => $this->configuration,
-    );
+    ];
   }
 
   /**
    * {@inheritdoc}
    */
   public function setConfiguration(array $configuration) {
-    $configuration += array(
+    $configuration += [
       'data' => array(),
       'uuid' => '',
       'title' => '',
       'weight' => '',
-    );
+    ];
     $this->configuration = $configuration['data'] + $this->defaultConfiguration();
     $this->uuid = $configuration['uuid'];
     $this->title = $configuration['title'];
@@ -172,21 +171,22 @@ abstract class TabBase extends ContextAwarePluginBase implements TabInterface, C
    * {@inheritdoc}
    */
   public function defaultConfiguration() {
-    return array();
+    return [];
   }
 
   /**
    * {@inheritdoc}
    */
   public function calculateDependencies() {
-    return array();
+    return [];
   }
-  
+
   /**
    * {@inheritdoc}
-   */  
+   */
   public function getContent() {
     $tab_content = '';
     return $tab_content;
   }
+
 }
