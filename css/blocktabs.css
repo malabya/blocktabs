@@ -3,12 +3,12 @@
  * Stylesheet for the blocktabs module.
  */
 .ui-tabs-vertical {
-  width: 55em; 
+  width: 55em;
 }
 .ui-tabs-vertical .ui-tabs-nav {
   padding: .2em .1em .2em .2em;
   float: left;
-  width: 12em; 
+  width: 12em;
 }
 .ui-tabs-vertical .ui-tabs-nav li {
   clear: left;
@@ -18,7 +18,7 @@
   margin: 0 -1px .2em 0;
 }
 .ui-tabs-vertical .ui-tabs-nav li a {
-  display:block;
+  display: block;
 }
 .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-active {
   padding-bottom: 0;
