@@ -26,7 +26,7 @@ class BlocktabsListBuilder extends ConfigEntityListBuilder {
   /**
    * Constructs a new BlocktabsListBuilder object.
    *
-   * @param EntityTypeInterface $entity_type
+   * @param \Drupal\Core\Entity\EntityTypeInterface $entity_type
    *   The entity type definition.
    * @param \Drupal\Core\Entity\EntityStorageInterface $entity_storage
    *   The blocktabs entity storage class.
@@ -75,7 +75,7 @@ class BlocktabsListBuilder extends ConfigEntityListBuilder {
     // Remove destination URL from the edit link to allow editing tabs.
     if (isset($operations['edit'])) {
       $operations['edit']['url'] = $entity->toUrl('edit-form');
-    }	
+    }
     return $operations;
   }
 
@@ -84,9 +84,9 @@ class BlocktabsListBuilder extends ConfigEntityListBuilder {
    */
   public function render() {
     $build = parent::render();
-    $build['#empty'] = $this->t('There are currently no blocktabs. <a href=":url">Add a new one</a>.', array(
+    $build['#empty'] = $this->t('There are currently no blocktabs. <a href=":url">Add a new one</a>.', [
       ':url' => $this->urlGenerator->generateFromRoute('blocktabs.add'),
-    ));
+    ]);
     return $build;
   }
 
