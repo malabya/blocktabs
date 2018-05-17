@@ -80,7 +80,7 @@ abstract class TabFormBase extends FormBase {
       '#required' => TRUE,
     ];
 
-    $form['data'] = $this->tab->buildConfigurationForm(array(), $form_state);
+    $form['data'] = $this->tab->buildConfigurationForm([], $form_state);
     $form['data']['#tree'] = TRUE;
 
     // Check the URL for a weight, then the tab, otherwise use default.
