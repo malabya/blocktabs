@@ -18,21 +18,20 @@
   Drupal.behaviors.blocktabs = {
     attach: function (context, settings) {
       $(context).find('div.blocktabs').each(function () {
-        if($(this).hasClass( "click" )){
+        if ($(this).hasClass('click')) {
           $(this).tabs({
-            event: "click"
+            event: 'click'
           });          			
         }
         else{
           $(this).tabs({
-            event: "mouseover"
+            event: 'mouseover'
           });
         }
-        if($(this).hasClass( "vertical" )){
-           $(this).addClass( "ui-tabs-vertical ui-helper-clearfix" );
-           $(this).find('li').removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );			
+        if ($(this).hasClass('vertical')) {
+           $(this).addClass('ui-tabs-vertical ui-helper-clearfix');
+           $(this).find('li').removeClass('ui-corner-top').addClass('ui-corner-left');			
         }
-		
       });
     }
   };
