@@ -66,11 +66,17 @@ abstract class BlocktabsFormBase extends EntityForm {
       '#required' => TRUE,
     ];
 
+    $form['#tree'] = FALSE;
+    $form['settings'] = [
+      '#type' => 'details',
+      '#title' => t('Tabs settings'),
+    ];
+
     $default_event = $this->entity->getEvent();
     if (empty($default_event)) {
       $default_event = 'mouseover';
     }
-    $form['event'] = [
+    $form['settings']['event'] = [
       '#type' => 'radios',
       '#title' => $this->t('Select an event'),
       '#default_value' => $default_event,
@@ -84,7 +90,7 @@ abstract class BlocktabsFormBase extends EntityForm {
     if (empty($default_style)) {
       $default_style = 'default';
     }
-    $form['style'] = [
+    $form['settings']['style'] = [
       '#type' => 'radios',
       '#title' => $this->t('Style'),
       '#default_value' => $default_style,
