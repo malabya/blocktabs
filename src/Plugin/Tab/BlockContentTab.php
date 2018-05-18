@@ -84,8 +84,8 @@ class BlockContentTab extends ConfigurableTabBase {
     $block_render_array = NULL;
     $block_uuid = $this->configuration['block_uuid'];
     if (!empty($block_uuid)) {
-      $block = \Drupal::entityManager()->loadEntityByUuid('block_content', $block_uuid);
-      $block_render_array = \Drupal::entityManager()
+      $block = \Drupal::service('entity.repository')->loadEntityByUuid('block_content', $block_uuid);
+      $block_render_array = \Drupal::entityTypeManager()
         ->getViewBuilder($block->getEntityTypeId())
         ->view($block, 'default');
     }

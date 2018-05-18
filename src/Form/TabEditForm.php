@@ -4,11 +4,12 @@ namespace Drupal\blocktabs\Form;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\blocktabs\BlocktabsInterface;
-
+use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 /**
  * Provides an edit form for tab.
  */
 class TabEditForm extends TabFormBase {
+  use DependencySerializationTrait;
 
   /**
    * {@inheritdoc}
