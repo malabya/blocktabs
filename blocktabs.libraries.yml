@@ -8,3 +8,8 @@ blocktabs:
   dependencies:
     - core/jquery.ui.tabs
     - core/drupal
+admin:
+  version: VERSION
+  css:
+    theme:
+      css/blocktabs.admin.css: {}
