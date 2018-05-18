@@ -13,3 +13,10 @@ admin:
   css:
     theme:
       css/blocktabs.admin.css: {}
+accordion:
+  version: VERSION
+  js:
+    js/blocktabs.accordion.js: {}
+  dependencies:
+    - core/jquery.ui.accordion
+    - core/drupal
