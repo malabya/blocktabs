@@ -125,6 +125,9 @@ abstract class TabFormBase extends FormBase {
     // pass that through for submission.
     $tab_data = (new FormState())->setValues($form_state->getValue('data'));
     $this->tab->submitConfigurationForm($form, $tab_data);
+    // $logger = \Drupal::logger('blocktabs');
+    // $logger->notice('submitForm:' . var_export($tab_data, true));
+    // $logger->notice('default_view_name:' . var_export($default_view_name, true));
     // Update the original form values.
     $form_state->setValue('data', $tab_data->getValues());
     $this->tab->setTitle($form_state->getValue('title'));
@@ -132,8 +135,21 @@ abstract class TabFormBase extends FormBase {
     if (!$this->tab->getUuid()) {
       $this->blocktabs->addTab($this->tab->getConfiguration());
     }
+    else {
+      $uuid = $this->tab->getUuid();
+      $config = $this->tab->getConfiguration();
+      $this->blocktabs->getTabs()->setInstanceConfiguration($uuid, $config);
+	}
+    // $config = $this->tab->getConfiguration();
+    // $logger = \Drupal::logger('blocktabs');
+    // $logger->notice('$config:' . var_export($config, true));
+    // $tab = $this->blocktabs->getTab($this->tab->getUuid());
+    // $config1 = $tab->getConfiguration();
+    // $logger = \Drupal::logger('blocktabs');
+    // $logger->notice('$config:' . var_export($config1, true));
+    // $tab = $this->tab;
     $this->blocktabs->save();
-
+   
     drupal_set_message($this->t('The tab was successfully applied.'));
     $form_state->setRedirectUrl($this->blocktabs->urlInfo('edit-form'));
   }
