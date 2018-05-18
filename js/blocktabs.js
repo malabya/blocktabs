@@ -17,7 +17,7 @@
    */
   Drupal.behaviors.blocktabs = {
     attach: function (context, settings) {
-      $(context).find('div.blocktabs').each(function () {
+      $(context).find('div.blocktabs.default, div.blocktabs.vertical').each(function () {
         if ($(this).hasClass('click')) {
           $(this).tabs({
             event: 'click'

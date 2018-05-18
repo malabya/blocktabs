@@ -97,6 +97,7 @@ abstract class BlocktabsFormBase extends EntityForm {
       '#options' => [
         'default' => $this->t('Default tabs'),
         'vertical' => $this->t('Vertical tabs'),
+        'accordion' => $this->t('Accordion'),
       ],
     ];
     return parent::form($form, $form_state);

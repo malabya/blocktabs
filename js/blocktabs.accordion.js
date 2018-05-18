@@ -17,14 +17,16 @@
    */
   Drupal.behaviors.blocktabs_accordion = {
     attach: function (context, settings) {
-      $(context).find('div.blocktabs-accordion').each(function () {
+      $(context).find('div.blocktabs.accordion').each(function () {
         if ($(this).hasClass('click')) {
           $(this).accordion({
+            collapsible: true,
             event: 'click'
           });
         }
         else {
           $(this).accordion({
+            collapsible: true,
             event: 'mouseover'
           });
         }
