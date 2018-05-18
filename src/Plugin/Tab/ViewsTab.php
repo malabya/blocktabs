@@ -58,7 +58,7 @@ class ViewsTab extends ConfigurableTabBase {
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
-    $view_options = Views::getViewsAsOptions(TRUE, 'all', NULL, FALSE, TRUE);
+    $view_options = Views::getViewsAsOptions(TRUE, 'enabled', NULL, FALSE, TRUE);
     $data = $form_state->getValue('data');
     $default_view_name = isset($data['view_name']) ? $data['view_name'] : $this->configuration['view_name'];	
     $form['view_name'] = [
