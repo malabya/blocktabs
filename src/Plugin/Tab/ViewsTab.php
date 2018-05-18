@@ -59,23 +59,25 @@ class ViewsTab extends ConfigurableTabBase {
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $view_options = Views::getViewsAsOptions(TRUE, 'all', NULL, FALSE, TRUE);
+    $data = $form_state->getValue('data');
+    $default_view_name = isset($data['view_name']) ? $data['view_name'] : $this->configuration['view_name'];	
     $form['view_name'] = [
       '#type' => 'select',
       '#title' => $this->t('view name'),
       '#options' => $view_options,
-      '#default_value' => $this->configuration['view_name'],
-      '#field_suffix' => '',
+      '#default_value' => $default_view_name,
+      // '#field_suffix' => '',
       // Drupal\blocktabs\Plugin\Tab\ViewsTab.
       '#ajax' => [
         'callback' => [$this, 'updateDisplay'],
-        'wrapper' => 'edit-view-display-wrapper',
+        'event' => 'change',
       ],
       '#required' => TRUE,
     ];
 
     $display_options = [];
-    if ($this->configuration['view_name']) {
-      $view = Views::getView($this->configuration['view_name']);
+    if ($default_view_name) {
+      $view = Views::getView($default_view_name);
       foreach ($view->storage->get('display') as $name => $display) {
         $display_options[$name] = $display['display_title'] . ' (' . $display['id'] . ')';
       }
@@ -88,7 +90,7 @@ class ViewsTab extends ConfigurableTabBase {
       '#prefix' => '<div id="edit-view-display-wrapper">',
       '#suffix' => '</div>',
       '#options' => $display_options,
-      '#validated' => TRUE,
+      // '#validated' => TRUE,
       '#required' => TRUE,
     ];
 
@@ -96,7 +98,7 @@ class ViewsTab extends ConfigurableTabBase {
       '#type' => 'textfield',
       '#title' => $this->t('Argument'),
       '#default_value' => $this->configuration['view_arg'],
-      '#field_suffix' => '',
+      // '#field_suffix' => '',
     ];
     return $form;
   }
@@ -104,24 +106,7 @@ class ViewsTab extends ConfigurableTabBase {
   /**
    * Update display option.
    */
-  public function updateDisplay($form, FormStateInterface $form_state) {
-
-    $form['data']['view_display']['#default_value'] = '';
-    $data = $form_state->getValue('data');
-    $view_name = isset($data['view_name']) ? $data['view_name'] : '';
-
-    $display_options = [];
-    if ($view_name) {
-      $view = Views::getView($view_name);
-      foreach ($view->storage->get('display') as $name => $display) {
-        $display_options[$name] = $display['display_title'] . ' (' . $display['id'] . ')';
-      }
-    }
-    $form['data']['view_display']['#options'] = $display_options;
-
-    $form_state->get('rerender', TRUE);
-    $form_state->setRebuild();
-
+  public function updateDisplay(array &$form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
     $response->addCommand(new ReplaceCommand('#edit-view-display-wrapper', drupal_render($form['data']['view_display'])));
     return $response;
