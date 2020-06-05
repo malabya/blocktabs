@@ -108,7 +108,8 @@ class ViewsTab extends ConfigurableTabBase {
    */
   public function updateDisplay(array &$form, FormStateInterface $form_state) {
     $response = new AjaxResponse();
-    $response->addCommand(new ReplaceCommand('#edit-view-display-wrapper', drupal_render($form['data']['view_display'])));
+    $renderer = \Drupal::service('renderer');
+    $response->addCommand(new ReplaceCommand('#edit-view-display-wrapper', $renderer->render($form['data']['view_display'])));
     return $response;
   }
 

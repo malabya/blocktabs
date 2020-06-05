@@ -51,7 +51,7 @@ class BlockContentTab extends ConfigurableTabBase {
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $sql = "SELECT bd.info, b.uuid FROM {block_content_field_data} bd LEFT JOIN {block_content} b ON bd.id = b.id";
-    $result = db_query($sql);
+    $result = \Drupal::database()->query($sql);
     $block_uuid_options = [
       '' => $this->t('- Select -'),
     ];
